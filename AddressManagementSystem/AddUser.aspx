@@ -58,10 +58,11 @@
             </div>
         </div>
         <p>
-            <asp:HyperLink runat="server" ID="HomeHyperLink" NavigateUrl="~/Home.aspx">Back To Home Page</asp:HyperLink> | <asp:HyperLink runat="server" ID="ViewUserDetailsHyperLink" NavigateUrl="~/ViewUserDetails.aspx">View User Details</asp:HyperLink>
-        </p>
-        <p>
             <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
         </p>
+        <p>
+            <asp:HyperLink runat="server" ID="HomeHyperLink" NavigateUrl="~/Home.aspx">Back To Home Page</asp:HyperLink> | <asp:HyperLink runat="server" ID="ViewUserDetailsHyperLink" NavigateUrl="~/ViewUserDetails.aspx">View User Details</asp:HyperLink>
+        </p>
+        
     </div>
 </asp:Content>

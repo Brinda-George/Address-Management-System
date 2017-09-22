@@ -44,6 +44,5 @@
                 <asp:Button runat="server" OnClick="btnRegister_Click" Text="Register" CssClass="btn btn-default" />
             </div>
         </div>
-        <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
     </div>
 </asp:Content>
