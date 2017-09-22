@@ -14,10 +14,9 @@ namespace AddressManagementSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            bool isLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
-            if (isLoggedIn)
+            if (!string.IsNullOrWhiteSpace(Convert.ToString(Session["Name"])))
             {
-                ((Site)this.Master).LblUserName = Session["Name"].ToString();
+                ((Site)this.Master).LblUserName = Convert.ToString(Session["Name"]);
             }
         }
         protected void btnSave_Click(object sender, EventArgs e)

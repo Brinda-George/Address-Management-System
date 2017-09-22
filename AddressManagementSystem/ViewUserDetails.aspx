@@ -31,10 +31,10 @@
         <Columns>
             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
             <asp:BoundField DataField="Age" HeaderText="Age" SortExpression="Age" />
-            <asp:BoundField DataField="DOB" HeaderText="DOB" SortExpression="DOB" />
+            <asp:BoundField DataField="DOB" HeaderText="Date Of Birth" SortExpression="DOB" />
             <asp:BoundField DataField="Address" HeaderText="Address" SortExpression="Address" />
             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-            <asp:BoundField DataField="PhoneNumber" HeaderText="PhoneNumber" SortExpression="PhoneNumber" />
+            <asp:BoundField DataField="PhoneNumber" HeaderText="Phone Number" SortExpression="PhoneNumber" />
         </Columns>
 </asp:GridView>
 <p>
