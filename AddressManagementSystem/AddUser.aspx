@@ -46,6 +46,21 @@
                 <%--<asp:Panel ID="pnlEmails" runat="server">
                 </asp:Panel>
                 <asp:Button ID="btnAddEmail" runat="server" Text="Add Email" OnClick="btnAddEmail_Click" />--%>
+                <%--<asp:Button ID="Add" runat="server" Text="Add Email" />
+                <asp:Button ID="Remove" runat="server" Text="Remove Email" />
+                <div id="textboxDiv"></div>  
+                <script>  
+                    $(document).ready(function () {
+                        var count = 0;
+                        $("#Add").on("click", function () {
+                            count += 1;
+                            $("#textboxDiv").append("<div><br><input type='text'CssClass='form-control'/><br></div>");
+                        });  
+                        $("#Remove").on("click", function() {  
+                            $("#textboxDiv").children().last().remove();  
+                        });  
+                    });  
+                </script>  --%>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The Email field is required." />
             </div>
         </div>
@@ -64,6 +79,11 @@
                 <asp:Button runat="server" OnClick="btnSave_Click" Text="Register" CssClass="btn btn-default" />
             </div>
         </div>
-        <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
+        <p>
+            <asp:HyperLink runat="server" ID="RegisterHyperLink" NavigateUrl="~/Register.aspx">Register as a new user</asp:HyperLink>
+        </p>
+        <p>
+            <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
+        </p>
     </div>
 </asp:Content>

@@ -110,10 +110,6 @@ namespace AddressManagementSystem
                     {
                         lblMessage.Text = "Name already in use, please choose another user name";
                     }
-                    else
-                    {
-                        Response.Redirect("~/Login.aspx");
-                    }
                 }
             }
         }

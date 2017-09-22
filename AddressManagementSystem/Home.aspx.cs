@@ -11,7 +11,11 @@ namespace AddressManagementSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ((MasterPage)Master).lblUserName = Session["Name"].ToString();
+            bool isLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            if (isLoggedIn)
+            {
+                ((Site)this.Master).LblUserName = "Hello, " + Session["Name"].ToString();
+            }
         }
 
     }

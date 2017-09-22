@@ -42,7 +42,6 @@ namespace AddressManagementSystem
             if (AuthenticateUser(txtUserName.Text, txtPassword.Text))
             {
                 Session["Name"] = txtUserName.Text;
-                Session["Password"] = txtPassword.Text;
                 FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, chkBoxRememberMe.Checked);
             }
             else
