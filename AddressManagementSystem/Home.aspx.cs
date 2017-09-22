@@ -14,7 +14,7 @@ namespace AddressManagementSystem
             bool isLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
             if (isLoggedIn)
             {
-                ((Site)this.Master).LblUserName = "Hello, " + Session["Name"].ToString();
+                ((Site)this.Master).LblUserName = "Welcome, " + Session["Name"].ToString();
             }
         }
 

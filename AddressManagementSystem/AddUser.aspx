@@ -43,24 +43,6 @@
             <asp:Label runat="server" AssociatedControlID="txtEmail" CssClass="col-md-2 control-label">Email</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" TextMode="Email" />
-                <%--<asp:Panel ID="pnlEmails" runat="server">
-                </asp:Panel>
-                <asp:Button ID="btnAddEmail" runat="server" Text="Add Email" OnClick="btnAddEmail_Click" />--%>
-                <%--<asp:Button ID="Add" runat="server" Text="Add Email" />
-                <asp:Button ID="Remove" runat="server" Text="Remove Email" />
-                <div id="textboxDiv"></div>  
-                <script>  
-                    $(document).ready(function () {
-                        var count = 0;
-                        $("#Add").on("click", function () {
-                            count += 1;
-                            $("#textboxDiv").append("<div><br><input type='text'CssClass='form-control'/><br></div>");
-                        });  
-                        $("#Remove").on("click", function() {  
-                            $("#textboxDiv").children().last().remove();  
-                        });  
-                    });  
-                </script>  --%>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The Email field is required." />
             </div>
         </div>
@@ -68,9 +50,6 @@
             <asp:Label runat="server" AssociatedControlID="txtPhoneNo" CssClass="col-md-2 control-label">Phone Number</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtPhoneNo" CssClass="form-control"/>
-                <%--<asp:Panel ID="pnlPhoneNos" runat="server">
-                </asp:Panel>
-                <asp:Button ID="btnPhoneNo" runat="server" Text="Add Phone Number" OnClick="btnAddPhoneNo_Click" />--%>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhoneNo" CssClass="text-danger" ErrorMessage="The Phone Number field is required." />
             </div>
         </div>

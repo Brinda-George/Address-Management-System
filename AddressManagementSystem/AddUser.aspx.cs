@@ -12,58 +12,14 @@ namespace AddressManagementSystem
 {
     public partial class AddUser : System.Web.UI.Page
     {
-        //protected void Page_PreInit(object sender, EventArgs e)
-        //{
-        //    List<string> EmailKeys = Request.Form.AllKeys.Where(key => key.Contains("txtEmail")).ToList();
-        //    int i = 1;
-        //    foreach (string key in EmailKeys)
-        //    {
-        //        this.CreateEmailTextBox("txtEmail" + i);
-        //        i++;
-        //    }
-        //    List<string> PhoneKeys = Request.Form.AllKeys.Where(key => key.Contains("txtPhoneNo")).ToList();
-        //    int j = 1;
-        //    foreach (string key in PhoneKeys)
-        //    {
-        //        this.CreatePhoneTextBox("txtPhoneNo" + j);
-        //        j++;
-        //    }
-        //}
         protected void Page_Load(object sender, EventArgs e)
         {
+            bool isLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            if (isLoggedIn)
+            {
+                ((Site)this.Master).LblUserName = Session["Name"].ToString();
+            }
         }
-        //protected void btnAddEmail_Click(object sender, EventArgs e)
-        //{
-        //    int index = pnlEmails.Controls.OfType<TextBox>().ToList().Count + 1;
-        //    this.CreateEmailTextBox("txtEmail" + index);
-        //}
-
-        //private void CreateEmailTextBox(string id)
-        //{
-        //    TextBox txt = new TextBox();
-        //    txt.ID = id;
-        //    pnlEmails.Controls.Add(txt);
-
-        //    Literal lt = new Literal();
-        //    lt.Text = "<br />";
-        //    pnlEmails.Controls.Add(lt);
-        //}
-        //protected void btnAddPhoneNo_Click(object sender, EventArgs e)
-        //{
-        //    int index = pnlPhoneNos.Controls.OfType<TextBox>().ToList().Count + 1;
-        //    this.CreatePhoneTextBox("txtEmail" + index);
-        //}
-
-        //private void CreatePhoneTextBox(string id)
-        //{
-        //    TextBox txt = new TextBox();
-        //    txt.ID = id;
-        //    pnlPhoneNos.Controls.Add(txt);
-
-        //    Literal lt = new Literal();
-        //    lt.Text = "<br />";
-        //    pnlPhoneNos.Controls.Add(lt);
-        //}
         protected void btnSave_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -89,25 +45,22 @@ namespace AddressManagementSystem
                     cmd.Parameters.Add(email);
                     cmd.Parameters.Add(phoneNo);
                     cmd.Parameters.Add(userId);
-                    //int countEmail = 0;
-                    //int countPhoneNo = 0;
-                    //foreach (TextBox textBox in pnlEmails.Controls.OfType<TextBox>())
-                    //{
-                    //    countEmail += 1;
-                    //    SqlParameter email = new SqlParameter("@Email" + countEmail, textBox.Text);
-                    //    cmd.Parameters.Add(email);
-                    //}
-                    //foreach (TextBox textBox in pnlPhoneNos.Controls.OfType<TextBox>())
-                    //{
-                    //    countPhoneNo += 1;
-                    //    SqlParameter phoneNo = new SqlParameter("@PhoneNo" + countPhoneNo, textBox.Text);
-                    //    cmd.Parameters.Add(phoneNo);
-                    //}
+
                     con.Open();
                     int ReturnCode = (int)cmd.ExecuteScalar();
                     if (ReturnCode == -1)
                     {
                         lblMessage.Text = "Name already in use, please choose another user name";
+                    }
+                    else
+                    {
+                        txtName.Text = "";
+                        txtAge.Text = "";
+                        txtDOB.Text = "";
+                        txtAddress.Text = "";
+                        txtEmail.Text = "";
+                        txtPhoneNo.Text = "";
+                        lblMessage.Text = "Registered Successfully!!";
                     }
                 }
             }
