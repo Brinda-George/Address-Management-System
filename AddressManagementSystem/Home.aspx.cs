@@ -11,8 +11,10 @@ namespace AddressManagementSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           ((Site)this.Master).LblUserName = "Welcome, " + Session["Name"].ToString();
+            if (!string.IsNullOrWhiteSpace(Convert.ToString(Session["Name"])))
+            {
+                ((Site)this.Master).LblUserName = "Welcome, " + Convert.ToString(Session["Name"]);
+            }
         }
-
     }
 }
