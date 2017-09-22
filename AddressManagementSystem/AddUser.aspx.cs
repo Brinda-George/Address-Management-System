@@ -31,7 +31,6 @@ namespace AddressManagementSystem
         //}
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
         //protected void btnAddEmail_Click(object sender, EventArgs e)
         //{
@@ -81,7 +80,7 @@ namespace AddressManagementSystem
                     SqlParameter address = new SqlParameter("@Address", txtAddress.Text);
                     SqlParameter email = new SqlParameter("@Email", txtEmail.Text);
                     SqlParameter phoneNo = new SqlParameter("@PhoneNo", txtPhoneNo.Text);
-                    int id = GetUserId();
+                    int id = Convert.ToInt32(Session["UserId"]);
                     SqlParameter userId = new SqlParameter("@UserId", id);
                     cmd.Parameters.Add(name);
                     cmd.Parameters.Add(age);
@@ -113,21 +112,6 @@ namespace AddressManagementSystem
                 }
             }
         }
-        protected int GetUserId()
-        {
-            int id;
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            using (SqlConnection con1 = new SqlConnection(CS))
-            {
-                SqlCommand cmd = new SqlCommand("spGetUserIdByUserName", con1);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter name = new SqlParameter("@UserName", Session["Name"].ToString());
-                cmd.Parameters.Add(name);
-                con1.Open();
-                id = (int)cmd.ExecuteScalar();
-            }
-            return id;
-        }
+        
     }
 }

@@ -76,13 +76,22 @@ namespace AddressManagementSystem {
         protected global::System.Web.UI.WebControls.TextBox txtPhoneNo;
         
         /// <summary>
-        /// RegisterHyperLink control.
+        /// HomeHyperLink control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink RegisterHyperLink;
+        protected global::System.Web.UI.WebControls.HyperLink HomeHyperLink;
+        
+        /// <summary>
+        /// ViewUserDetailsHyperLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ViewUserDetailsHyperLink;
         
         /// <summary>
         /// lblMessage control.

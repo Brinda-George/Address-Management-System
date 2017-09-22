@@ -42,12 +42,29 @@ namespace AddressManagementSystem
             if (AuthenticateUser(txtUserName.Text, txtPassword.Text))
             {
                 Session["Name"] = txtUserName.Text;
+                Session["UserId"] = GetUserId();
                 FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, chkBoxRememberMe.Checked);
             }
             else
             {
                 lblMessage.Text = "Invalid User Name and/or Password";
             }
+        }
+        protected int GetUserId()
+        {
+            int id;
+            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con1 = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("spGetUserIdByUserName", con1);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter name = new SqlParameter("@UserName", Session["Name"].ToString());
+                cmd.Parameters.Add(name);
+                con1.Open();
+                id = (int)cmd.ExecuteScalar();
+            }
+            return id;
         }
     }
 }

@@ -1,0 +1,22 @@
+﻿.gridview 
+{
+    border-collapse: collapse;
+    width: 100%;
+    margin:50px auto;
+}
+.gridview th, td 
+{
+    text-align: left;
+    padding: 8px;
+    border: none;
+}
+.gridview tr:nth-child(even)
+{
+    background-color: #f2f2f2
+}
+.gridview th 
+{
+    background-color: #044980;
+    color: white;
+    font-weight: bold; 
+}
