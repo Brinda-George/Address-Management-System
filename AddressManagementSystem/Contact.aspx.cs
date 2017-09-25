@@ -37,8 +37,8 @@ namespace AddressManagementSystem
                       System.Net.NetworkCredential("YourGmailID@gmail.com", "YourGmailPassowrd");
                     smtpClient.Send(mailMessage);
 
-                    Label1.ForeColor = System.Drawing.Color.Blue;
-                    Label1.Text = "Thank you for contacting us";
+                    lblMessage.ForeColor = System.Drawing.Color.Blue;
+                    lblMessage.Text = "Thank you for contacting us";
 
                     txtName.Enabled = false;
                     txtEmail.Enabled = false;
@@ -51,8 +51,8 @@ namespace AddressManagementSystem
             {
                 // Log the exception information to 
                 // database table or event viewer
-                Label1.ForeColor = System.Drawing.Color.Red;
-                Label1.Text = "There is an unkwon problem. Please try later";
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = "There is an unkwon problem. Please try later";
             }
         }
     }

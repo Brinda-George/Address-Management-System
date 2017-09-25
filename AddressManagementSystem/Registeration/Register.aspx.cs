@@ -9,7 +9,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace AddressManagementSystem
+namespace AddressManagementSystem.Registeration
 {
     public partial class Register : System.Web.UI.Page
     {

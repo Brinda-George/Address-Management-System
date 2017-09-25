@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="AddressManagementSystem.Register" %>
+﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="AddressManagementSystem.Registeration.Register" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -44,6 +44,6 @@
                 <asp:Button runat="server" OnClick="btnRegister_Click" Text="Register" CssClass="btn btn-default" />
             </div>
         </div>
-        <asp:Label ID="lblMessage" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="lblMessage" runat="server"></asp:Label>
     </div>
 </asp:Content>

@@ -43,7 +43,7 @@
                     <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
                 </div>
                 <p>
-                    <asp:HyperLink runat="server" ID="RegisterHyperLink" NavigateUrl="~/Register.aspx">Register as a new user</asp:HyperLink> | <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" NavigateUrl="~/ForgetPassword.aspx">Forgot your password?</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="RegisterHyperLink" NavigateUrl="~/Registeration/Register.aspx">Register as a new user</asp:HyperLink> | <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" NavigateUrl="~/ForgetPassword.aspx">Forgot your password?</asp:HyperLink>
                 </p>
             </section>
         </div>
