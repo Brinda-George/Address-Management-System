@@ -44,7 +44,7 @@ namespace AddressManagementSystem
                     txtEmail.Enabled = false;
                     txtComments.Enabled = false;
                     txtSubject.Enabled = false;
-                    Button1.Enabled = false;
+                    btnSubmit.Enabled = false;
                 }
             }
             catch (Exception ex)

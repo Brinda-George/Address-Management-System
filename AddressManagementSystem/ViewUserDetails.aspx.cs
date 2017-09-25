@@ -44,7 +44,7 @@ namespace AddressManagementSystem
         }
         protected void GridViewUser_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            editName = GridViewUser.Rows[e.NewEditIndex].Cells[1].Text;
+            editName = GridViewUser.Rows[e.NewEditIndex].Cells[0].Text;
             GridViewUser.EditIndex = e.NewEditIndex;
             BindData();
         }
@@ -57,7 +57,7 @@ namespace AddressManagementSystem
         {
             try
             {
-                string name = GridViewUser.Rows[e.RowIndex].Cells[1].Text;
+                string name = GridViewUser.Rows[e.RowIndex].Cells[0].Text;
                 SqlConnection con = new SqlConnection(CS);
                 SqlDataAdapter da = new SqlDataAdapter("spDeleteUser", con);
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
@@ -116,7 +116,7 @@ namespace AddressManagementSystem
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Control control = e.Row.Cells[0].Controls[1];
+                Control control = e.Row.Cells[7].Controls[0];
                 if (control is LinkButton)
                 {
                     ((LinkButton)control).OnClientClick =

@@ -34,7 +34,7 @@
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtAddress" CssClass="col-md-2 control-label">Address</asp:Label>
             <div class="col-md-10">
-                <asp:TextBox runat="server" ID="txtAddress" CssClass="form-control" Height="100px" TextMode="MultiLine" Width="280px"/>
+                <asp:TextBox runat="server" ID="txtAddress" CssClass="form-control" Rows="5" TextMode="MultiLine" Width="280px"/>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtAddress" CssClass="text-danger" ErrorMessage="The Address field is required." />
             </div>
         </div>

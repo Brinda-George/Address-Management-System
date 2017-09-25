@@ -11,7 +11,6 @@ namespace AddressManagementSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ((Site)this.Master).LblUserName = "Welcome, " + Convert.ToString(Session["Name"]);
         }
     }
 }
