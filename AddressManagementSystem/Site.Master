@@ -11,7 +11,12 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/gridstyle.css" rel="stylesheet" type="text/css" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
+    <%--<script src="Scripts/jquery-3.1.1.js"></script>--%>
+    <%--<script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/jquery-3.1.1.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/print.js") %>"></script>--%>
+    
+<%--<script src="~/Scripts/print.js"></script>--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">  
     </asp:ContentPlaceHolder>
 </head>
 <body>
@@ -43,7 +48,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#"><asp:Label ID="lblUserName" runat="server"></asp:Label></a></li>
                                 <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/Login.aspx" />
+                                    <asp:LoginStatus ID="Logout" runat="server" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/Login.aspx" OnLoggingOut="Logout_LoggingOut"/>
                                 </li>
                             </ul>
                         </LoggedInTemplate>
@@ -51,22 +56,22 @@
                 </div>
             </div>
         </div>
-        <%--<div id="TitleContent" style="text-align: center">
-            <a runat="server" href="~/">
-                <asp:Image  ID="Image1" runat="server" ImageUrl="~/Images/logo.jpg" Height="100px" BorderStyle="None" />
-            </a>  
-            <br />  
-        </div>--%>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
        
             </asp:ContentPlaceHolder>
-             
+            <%--<script src="Scripts/print.js"></script>--%>
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - Address Management System</p>
             </footer>
         </div>
+        <%--<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+            <Scripts>
+                <asp:ScriptReference Path="~/Scripts/jquery-3.1.1.js" />
+                <asp:ScriptReference Path="~/Scripts/print.js" />
+            </Scripts>
+        </asp:ScriptManager>--%>
     </form> 
 </body>
 </html>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -14,7 +15,7 @@ namespace AddressManagementSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(Convert.ToString(Session["Name"])))
+            if (Session["Name"]!=null)
             {
                 ((Site)this.Master).LblUserName = Convert.ToString(Session["Name"]);
             }

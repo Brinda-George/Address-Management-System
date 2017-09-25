@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,10 +20,23 @@ namespace AddressManagementSystem
             if (!string.IsNullOrWhiteSpace(Convert.ToString(Session["Name"])))
             {
                 ((Site)this.Master).LblUserName = Convert.ToString(Session["Name"]);
+                if (!IsPostBack)
+                {
+                    BindData();
+                }
             }
-            if (!IsPostBack)
+        }
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            if (GridViewUser.SelectedRow == null)
             {
-                BindData();
+                DetailsViewUser.Visible = false;
+                btnPrint.Visible = false;
+            }
+            else
+            {
+                DetailsViewUser.Visible = true;
+                btnPrint.Visible = true;
             }
         }
         private void BindData()
