@@ -10,20 +10,17 @@ namespace AddressManagementSystem
 {
     public partial class Site : System.Web.UI.MasterPage
     {
-        //public Label LblUserName
-        //{
-        //    get
-        //    {
-        //        return this.lvUserInfo.FindControl("lblUserName") != null ? (Label)lvUserInfo.FindControl("lblUserName") : null;
-        //    }
-        //}
         public string LblUserName
         {
+
+            // Find label lblUserName in master page and Return its text
             get
             {
                 var lblMyLabel = (Label)lvUserInfo.FindControl("lblUserName");
                 return lblMyLabel.Text;
             }
+
+            // Find label lblUserName in master page and set its text
             set
             {
                 var lblMyLabel = (Label)lvUserInfo.FindControl("lblUserName");

@@ -20,39 +20,48 @@ namespace AddressManagementSystem
             {
                 if (Page.IsValid)
                 {
+                    // Create the message object to be sent
                     MailMessage mailMessage = new MailMessage();
-                    mailMessage.From = new MailAddress("YourGmailID@gmail.com");
-                    mailMessage.To.Add("AdministratorID@YourCompany.com");
-                    mailMessage.Subject = txtSubject.Text;
 
+                    // Add your email address to the recipients
+                    mailMessage.From = new MailAddress("YourGmailID@gmail.com");
+
+                    // Configure the address we are sending the mail from
+                    mailMessage.To.Add("AdministratorID@YourCompany.com");
+
+                    mailMessage.Subject = txtSubject.Text;
                     mailMessage.Body = "<b>Sender Name : </b>" + txtName.Text + "<br/>"
                       + "<b>Sender Email : </b>" + txtEmail.Text + "<br/>"
                       + "<b>Comments : </b>" + txtComments.Text;
                     mailMessage.IsBodyHtml = true;
 
-
+                    // Configure an SmtpClient to send the mail.
                     SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                     smtpClient.EnableSsl = true;
-                    smtpClient.Credentials = new
-                      System.Net.NetworkCredential("YourGmailID@gmail.com", "YourGmailPassowrd");
+
+                    // Setup credentials to login to our sender email address ("UserName", "Password")
+                    smtpClient.Credentials = new System.Net.NetworkCredential("YourGmailID@gmail.com", "YourGmailPassowrd");
+
+                    // Send the message
                     smtpClient.Send(mailMessage);
 
+                    // Display some feedback to the user to let them know it was sent
                     lblMessage.ForeColor = System.Drawing.Color.Blue;
                     lblMessage.Text = "Thank you for contacting us";
 
-                    txtName.Enabled = false;
-                    txtEmail.Enabled = false;
-                    txtComments.Enabled = false;
-                    txtSubject.Enabled = false;
+                    // Clear the form and disable submit button
+                    txtName.Text = "";
+                    txtEmail.Text = "";
+                    txtComments.Text = "";
+                    txtSubject.Text = "";
                     btnSubmit.Enabled = false;
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception information to 
-                // database table or event viewer
+                // Log the exception information to event viewer
                 lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = "There is an unkwon problem. Please try later";
+                lblMessage.Text = "Your message failed to send, please try later.";
             }
         }
     }

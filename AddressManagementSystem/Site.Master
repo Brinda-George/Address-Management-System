@@ -11,11 +11,6 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/gridstyle.css" rel="stylesheet" type="text/css" />
-    <%--<script src="Scripts/jquery-3.1.1.js"></script>--%>
-    <%--<script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/jquery-3.1.1.js") %>"></script>
-    <script type="text/javascript" src="<%= ResolveUrl ("~/Scripts/print.js") %>"></script>--%>
-    
-<%--<script src="~/Scripts/print.js"></script>--%>
     <asp:ContentPlaceHolder ID="head" runat="server">  
     </asp:ContentPlaceHolder>
 </head>
@@ -60,18 +55,11 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
        
             </asp:ContentPlaceHolder>
-            <%--<script src="Scripts/print.js"></script>--%>
             <hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - Address Management System</p>
             </footer>
         </div>
-        <%--<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
-            <Scripts>
-                <asp:ScriptReference Path="~/Scripts/jquery-3.1.1.js" />
-                <asp:ScriptReference Path="~/Scripts/print.js" />
-            </Scripts>
-        </asp:ScriptManager>--%>
     </form> 
 </body>
 </html>
