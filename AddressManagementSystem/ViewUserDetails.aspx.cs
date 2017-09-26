@@ -41,20 +41,27 @@ namespace AddressManagementSystem
         }
         private void BindData()
         {
-            using (SqlConnection con = new SqlConnection(CS))
+            try
             {
-                SqlDataAdapter da = new SqlDataAdapter("spGetUserDetailsbyUserId", con);
-                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("spGetUserDetailsbyUserId", con);
+                    da.SelectCommand.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter userId = new SqlParameter();
-                userId.ParameterName = "@UserId";
-                userId.Value = Session["UserId"];
-                da.SelectCommand.Parameters.Add(userId);
+                    SqlParameter userId = new SqlParameter();
+                    userId.ParameterName = "@UserId";
+                    userId.Value = Session["UserId"];
+                    da.SelectCommand.Parameters.Add(userId);
 
-                DataSet DS = new DataSet();
-                da.Fill(DS);
-                GridViewUser.DataSource = DS;
-                GridViewUser.DataBind();
+                    DataSet DS = new DataSet();
+                    da.Fill(DS);
+                    GridViewUser.DataSource = DS;
+                    GridViewUser.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
         protected void GridViewUser_RowEditing(object sender, GridViewEditEventArgs e)
@@ -94,51 +101,65 @@ namespace AddressManagementSystem
         }
         protected void GridViewUser_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            string UserName = editName;
-            string Name = e.NewValues[0].ToString();
-            string Age = e.NewValues[1].ToString();
-            string DOB = e.NewValues[2].ToString();
-            string Address = e.NewValues[3].ToString();
-            string Email = e.NewValues[4].ToString();
-            string PhoneNumber = e.NewValues[5].ToString();
-            GridViewUser.EditIndex = -1;
-
-            using (SqlConnection con = new SqlConnection(CS))
+            try
             {
-                SqlDataAdapter da = new SqlDataAdapter("spUpdateUser", con);
-                da.SelectCommand.CommandType = CommandType.StoredProcedure;
-                SqlParameter userName = new SqlParameter("@UserName", UserName);
-                SqlParameter name = new SqlParameter("@Name", Name);
-                SqlParameter age = new SqlParameter("@Age", Age);
-                SqlParameter dob = new SqlParameter("@DOB", DOB);
-                SqlParameter address = new SqlParameter("@Address", Address);
-                SqlParameter email = new SqlParameter("@Email", Email);
-                SqlParameter phoneNo = new SqlParameter("@PhoneNumber", PhoneNumber);
+                string UserName = editName;
+                string Name = e.NewValues[0].ToString();
+                string Age = e.NewValues[1].ToString();
+                string DOB = e.NewValues[2].ToString();
+                string Address = e.NewValues[3].ToString();
+                string Email = e.NewValues[4].ToString();
+                string PhoneNumber = e.NewValues[5].ToString();
+                GridViewUser.EditIndex = -1;
 
-                da.SelectCommand.Parameters.Add(userName);
-                da.SelectCommand.Parameters.Add(name);
-                da.SelectCommand.Parameters.Add(age);
-                da.SelectCommand.Parameters.Add(dob);
-                da.SelectCommand.Parameters.Add(address);
-                da.SelectCommand.Parameters.Add(email);
-                da.SelectCommand.Parameters.Add(phoneNo);
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("spUpdateUser", con);
+                    da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    SqlParameter userName = new SqlParameter("@UserName", UserName);
+                    SqlParameter name = new SqlParameter("@Name", Name);
+                    SqlParameter age = new SqlParameter("@Age", Age);
+                    SqlParameter dob = new SqlParameter("@DOB", DOB);
+                    SqlParameter address = new SqlParameter("@Address", Address);
+                    SqlParameter email = new SqlParameter("@Email", Email);
+                    SqlParameter phoneNo = new SqlParameter("@PhoneNumber", PhoneNumber);
 
-                con.Open();
-                da.SelectCommand.ExecuteScalar();
+                    da.SelectCommand.Parameters.Add(userName);
+                    da.SelectCommand.Parameters.Add(name);
+                    da.SelectCommand.Parameters.Add(age);
+                    da.SelectCommand.Parameters.Add(dob);
+                    da.SelectCommand.Parameters.Add(address);
+                    da.SelectCommand.Parameters.Add(email);
+                    da.SelectCommand.Parameters.Add(phoneNo);
+
+                    con.Open();
+                    da.SelectCommand.ExecuteScalar();
+                }
+                BindData();
             }
-                
-            BindData();
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         protected void GridViewUser_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Control control = e.Row.Cells[7].Controls[0];
-                if (control is LinkButton)
+                try
                 {
-                    ((LinkButton)control).OnClientClick =
-                      "return confirm('Are you sure you want to delete? This cannot be undone.');";
+                    Control control = e.Row.Cells[7].Controls[0];
+                    if (control is LinkButton)
+                    {
+                        ((LinkButton)control).OnClientClick =
+                          "return confirm('Are you sure you want to delete? This cannot be undone.');";
+                    }
                 }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
             }
         }
 

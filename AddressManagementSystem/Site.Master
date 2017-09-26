@@ -29,7 +29,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="#">Address Management System</a>
+                    <a class="navbar-brand" runat="server" href="~/Public/About.aspx">Address Management System</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
