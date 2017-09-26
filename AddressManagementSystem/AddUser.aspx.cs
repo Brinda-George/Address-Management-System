@@ -24,48 +24,59 @@ namespace AddressManagementSystem
         {
             if (Page.IsValid)
             {
-                string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(CS))
+                try
                 {
-                    SqlCommand cmd = new SqlCommand("spAddUser", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    SqlParameter name = new SqlParameter("@Name", txtName.Text);
-                    SqlParameter age = new SqlParameter("@Age", txtAge.Text);
-                    SqlParameter dob = new SqlParameter("@DOB", txtDOB.Text);
-                    SqlParameter address = new SqlParameter("@Address", txtAddress.Text);
-                    SqlParameter email = new SqlParameter("@Email", txtEmail.Text);
-                    SqlParameter phoneNo = new SqlParameter("@PhoneNo", txtPhoneNo.Text);
-                    int id = Convert.ToInt32(Session["UserId"]);
-                    SqlParameter userId = new SqlParameter("@UserId", id);
-
-                    cmd.Parameters.Add(name);
-                    cmd.Parameters.Add(age);
-                    cmd.Parameters.Add(dob);
-                    cmd.Parameters.Add(address);
-                    cmd.Parameters.Add(email);
-                    cmd.Parameters.Add(phoneNo);
-                    cmd.Parameters.Add(userId);
-
-                    con.Open();
-                    int ReturnCode = (int)cmd.ExecuteScalar();
-                    if (ReturnCode == -1)
+                    string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(CS))
                     {
-                        lblMessage.Text = "Name already in use, please choose another user name";
-                    }
-                    else
-                    {
-                        txtName.Text = "";
-                        txtAge.Text = "";
-                        txtDOB.Text = "";
-                        txtAddress.Text = "";
-                        txtEmail.Text = "";
-                        txtPhoneNo.Text = "";
-                        lblMessage.Text = "Registered Successfully!!";
+                        SqlCommand cmd = new SqlCommand("spAddUser", con);
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        SqlParameter name = new SqlParameter("@Name", txtName.Text);
+                        SqlParameter age = new SqlParameter("@Age", txtAge.Text);
+                        SqlParameter dob = new SqlParameter("@DOB", txtDOB.Text);
+                        SqlParameter address = new SqlParameter("@Address", txtAddress.Text);
+                        SqlParameter email = new SqlParameter("@Email", txtEmail.Text);
+                        SqlParameter phoneNo = new SqlParameter("@PhoneNo", txtPhoneNo.Text);
+                        int id = Convert.ToInt32(Session["UserId"]);
+                        SqlParameter userId = new SqlParameter("@UserId", id);
+
+                        cmd.Parameters.Add(name);
+                        cmd.Parameters.Add(age);
+                        cmd.Parameters.Add(dob);
+                        cmd.Parameters.Add(address);
+                        cmd.Parameters.Add(email);
+                        cmd.Parameters.Add(phoneNo);
+                        cmd.Parameters.Add(userId);
+
+                        con.Open();
+                        int ReturnCode = (int)cmd.ExecuteScalar();
+
+                        if (ReturnCode == -1)
+                        {
+                            lblMessage.ForeColor = System.Drawing.Color.Red;
+                            lblMessage.Text = "Name already in use, please choose another user name";
+                        }
+                        else
+                        {
+                            txtName.Text = "";
+                            txtAge.Text = "";
+                            txtDOB.Text = "";
+                            txtAddress.Text = "";
+                            txtEmail.Text = "";
+                            txtPhoneNo.Text = "";
+                            lblMessage.ForeColor = System.Drawing.Color.Green;
+                            lblMessage.Text = "Registered Successfully!!";
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    lblMessage.ForeColor = System.Drawing.Color.Red;
+                    lblMessage.Text = ex.Message;
+                }
+
             }
         }
-        
     }
 }

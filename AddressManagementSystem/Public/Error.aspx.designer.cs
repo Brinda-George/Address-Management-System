@@ -7,45 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AddressManagementSystem {
+namespace AddressManagementSystem.Public {
     
     
-    public partial class test {
+    public partial class Error {
         
         /// <summary>
-        /// form1 control.
+        /// FriendlyErrorMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label FriendlyErrorMsg;
         
         /// <summary>
-        /// pnlTextBoxes control.
+        /// DetailedErrorPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlTextBoxes;
+        protected global::System.Web.UI.WebControls.Panel DetailedErrorPanel;
         
         /// <summary>
-        /// btnAdd control.
+        /// ErrorDetailedMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.Label ErrorDetailedMsg;
         
         /// <summary>
-        /// btnSave control.
+        /// ErrorHandler control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.WebControls.Label ErrorHandler;
+        
+        /// <summary>
+        /// InnerMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label InnerMessage;
+        
+        /// <summary>
+        /// InnerTrace control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label InnerTrace;
     }
 }

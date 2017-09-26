@@ -41,20 +41,21 @@ namespace AddressManagementSystem
         }
         private void BindData()
         {
-            SqlConnection con = new SqlConnection(CS);
-            SqlDataAdapter da = new SqlDataAdapter("spGetUserDetailsbyUserId", con);
-            da.SelectCommand.CommandType = CommandType.StoredProcedure;
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlDataAdapter da = new SqlDataAdapter("spGetUserDetailsbyUserId", con);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter userId = new SqlParameter();
-            userId.ParameterName = "@UserId";
-            userId.Value = Session["UserId"];
-            da.SelectCommand.Parameters.Add(userId);
+                SqlParameter userId = new SqlParameter();
+                userId.ParameterName = "@UserId";
+                userId.Value = Session["UserId"];
+                da.SelectCommand.Parameters.Add(userId);
 
-            DataSet DS = new DataSet();
-            da.Fill(DS);
-            GridViewUser.DataSource = DS;
-            GridViewUser.DataBind();
-            con.Close();
+                DataSet DS = new DataSet();
+                da.Fill(DS);
+                GridViewUser.DataSource = DS;
+                GridViewUser.DataBind();
+            }
         }
         protected void GridViewUser_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -72,14 +73,15 @@ namespace AddressManagementSystem
             try
             {
                 string name = GridViewUser.Rows[e.RowIndex].Cells[0].Text;
-                SqlConnection con = new SqlConnection(CS);
-                SqlDataAdapter da = new SqlDataAdapter("spDeleteUser", con);
-                da.SelectCommand.CommandType = CommandType.StoredProcedure;
-                SqlParameter username = new SqlParameter("@Name", name);
-                da.SelectCommand.Parameters.Add(username);
-                con.Open();
-                da.SelectCommand.ExecuteScalar();
-                con.Close();
+                using (SqlConnection con = new SqlConnection(CS))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("spDeleteUser", con);
+                    da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    SqlParameter username = new SqlParameter("@Name", name);
+                    da.SelectCommand.Parameters.Add(username);
+                    con.Open();
+                    da.SelectCommand.ExecuteScalar();
+                }
             }
             catch (Exception ex)
             {
@@ -89,7 +91,6 @@ namespace AddressManagementSystem
             {
                 Server.Transfer("ViewUserDetails.aspx");
             }
-            BindData();
         }
         protected void GridViewUser_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
@@ -101,29 +102,31 @@ namespace AddressManagementSystem
             string Email = e.NewValues[4].ToString();
             string PhoneNumber = e.NewValues[5].ToString();
             GridViewUser.EditIndex = -1;
-            
-            SqlConnection con = new SqlConnection(CS);
-            SqlDataAdapter da = new SqlDataAdapter("spUpdateUser", con);
-            da.SelectCommand.CommandType = CommandType.StoredProcedure;
-            SqlParameter userName = new SqlParameter("@UserName", UserName);
-            SqlParameter name = new SqlParameter("@Name", Name);
-            SqlParameter age = new SqlParameter("@Age", Age);
-            SqlParameter dob = new SqlParameter("@DOB", DOB);
-            SqlParameter address = new SqlParameter("@Address", Address);
-            SqlParameter email = new SqlParameter("@Email", Email);
-            SqlParameter phoneNo = new SqlParameter("@PhoneNumber", PhoneNumber);
 
-            da.SelectCommand.Parameters.Add(userName);
-            da.SelectCommand.Parameters.Add(name);
-            da.SelectCommand.Parameters.Add(age);
-            da.SelectCommand.Parameters.Add(dob);
-            da.SelectCommand.Parameters.Add(address);
-            da.SelectCommand.Parameters.Add(email);
-            da.SelectCommand.Parameters.Add(phoneNo);
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlDataAdapter da = new SqlDataAdapter("spUpdateUser", con);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                SqlParameter userName = new SqlParameter("@UserName", UserName);
+                SqlParameter name = new SqlParameter("@Name", Name);
+                SqlParameter age = new SqlParameter("@Age", Age);
+                SqlParameter dob = new SqlParameter("@DOB", DOB);
+                SqlParameter address = new SqlParameter("@Address", Address);
+                SqlParameter email = new SqlParameter("@Email", Email);
+                SqlParameter phoneNo = new SqlParameter("@PhoneNumber", PhoneNumber);
 
-            con.Open();
-            da.SelectCommand.ExecuteScalar();
-            con.Close();
+                da.SelectCommand.Parameters.Add(userName);
+                da.SelectCommand.Parameters.Add(name);
+                da.SelectCommand.Parameters.Add(age);
+                da.SelectCommand.Parameters.Add(dob);
+                da.SelectCommand.Parameters.Add(address);
+                da.SelectCommand.Parameters.Add(email);
+                da.SelectCommand.Parameters.Add(phoneNo);
+
+                con.Open();
+                da.SelectCommand.ExecuteScalar();
+            }
+                
             BindData();
         }
         protected void GridViewUser_RowDataBound(object sender, GridViewRowEventArgs e)

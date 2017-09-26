@@ -12,14 +12,15 @@ namespace AddressManagementSystem
         protected void Application_Start(object sender, EventArgs e)
         {
         }
-        //public void Session_End(object s, EventArgs e)
+        //void Application_Error(object sender, EventArgs e)
         //{
-        //    Session.Clear();
-        //    Session.Abandon();
-        //    Session.RemoveAll();
-        //    FormsAuthentication.SignOut();
-        //    FormsAuthentication.RedirectToLoginPage();
-        //    Roles.DeleteCookie();
+        //    Exception exc = Server.GetLastError();
+
+        //    if (exc is HttpUnhandledException)
+        //    {
+        //        // Pass the error on to the error page.
+        //        Server.Transfer("Error.aspx?handler=Application_Error%20-%20Global.asax", true);
+        //    }
         //}
     }
 }

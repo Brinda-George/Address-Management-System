@@ -39,15 +39,23 @@ namespace AddressManagementSystem
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            if (AuthenticateUser(txtUserName.Text, txtPassword.Text))
+            try
             {
-                Session["Name"] = txtUserName.Text;
-                Session["UserId"] = GetUserId();
-                FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, chkBoxRememberMe.Checked);
+                if (AuthenticateUser(txtUserName.Text, txtPassword.Text))
+                {
+                    Session["Name"] = txtUserName.Text;
+                    Session["UserId"] = GetUserId();
+                    FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, chkBoxRememberMe.Checked);
+                }
+                else
+                {
+                    lblMessage.Text = "Invalid User Name and/or Password";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                lblMessage.Text = "Invalid User Name and/or Password";
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = ex.Message;
             }
         }
         protected int GetUserId()

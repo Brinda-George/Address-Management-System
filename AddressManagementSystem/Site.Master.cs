@@ -41,5 +41,6 @@ namespace AddressManagementSystem
             FormsAuthentication.SignOut();
             FormsAuthentication.RedirectToLoginPage();
         }
+        
     }
 }
