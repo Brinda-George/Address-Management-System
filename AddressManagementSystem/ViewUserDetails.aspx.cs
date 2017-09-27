@@ -81,8 +81,7 @@ namespace AddressManagementSystem
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = ex.Message;
+                ErrorMessage.Text = ex.Message;
             }
         }
         protected void GridViewUser_RowEditing(object sender, GridViewEditEventArgs e)
@@ -132,8 +131,8 @@ namespace AddressManagementSystem
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = ex.Message;
+                ErrorMessage.Text = ex.Message;
+
             }
         }
         protected void GridViewUser_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -175,8 +174,7 @@ namespace AddressManagementSystem
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = ex.Message;
+                ErrorMessage.Text = ex.Message;
             }
         }
         protected void GridViewUser_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -197,8 +195,8 @@ namespace AddressManagementSystem
             }
             catch (Exception ex)
             {
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = ex.Message;
+                ErrorMessage.Text = ex.Message;
+
             }
         }
     }
