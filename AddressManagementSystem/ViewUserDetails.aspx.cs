@@ -18,8 +18,13 @@ namespace AddressManagementSystem
     {
         // Load connection string from web.config file
         string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-
         static string editName;
+
+        #region Page Load
+        /// <summary>
+        ///     Assign session variable to label in master page
+        ///     Bind data to Grid View on page load
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             // Check if session variable is null, empty, or consists only of white-space characters.
@@ -36,6 +41,13 @@ namespace AddressManagementSystem
                 }
             }
         }
+        #endregion
+
+        #region Page PreRender
+        /// <summary>
+        ///     Show DetailsView if any row is selected
+        ///     Hide DetailsView if no row is selected
+        /// </summary>
         protected void Page_PreRender(object sender, EventArgs e)
         {
             // Check if any row in Gridview is selected
@@ -52,6 +64,12 @@ namespace AddressManagementSystem
                 btnPrint.Visible = true;
             }
         }
+        #endregion
+
+        #region Bind GridView
+        /// <summary>
+        ///     Binding data from stored procedure to Grid View
+        /// </summary>
         private void BindData()
         {
             try
@@ -84,6 +102,13 @@ namespace AddressManagementSystem
                 ErrorMessage.Text = ex.Message;
             }
         }
+        #endregion
+
+        #region Row Editing
+        /// <summary>
+        ///     Get name on row to be edited
+        ///     Update EditIndex of Grid View
+        /// </summary>
         protected void GridViewUser_RowEditing(object sender, GridViewEditEventArgs e)
         {
             // Get name in the row
@@ -95,6 +120,14 @@ namespace AddressManagementSystem
             // Bind data to GridView
             BindData();
         }
+        #endregion
+
+        #region Row Updating
+        /// <summary>
+        ///     Set EditIndex as -1
+        ///     Update row in database using stored procedure
+        ///     Bind data to Grid View
+        /// </summary>
         protected void GridViewUser_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
@@ -135,21 +168,35 @@ namespace AddressManagementSystem
 
             }
         }
+        #endregion
+
+        #region Row Cancel Editing
+        /// <summary>
+        ///     Set EditIndex to -1 
+        ///     Bind data to Grid View
+        /// </summary>
         protected void GridViewUser_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-            // Set EditIndex to - 1 and the GridView is populated with data.
+            // Set EditIndex to - 1
             GridViewUser.EditIndex = -1;
 
             // Bind data to GridView
             BindData();
         }
+        #endregion
+
+        #region Deleting Row
+        /// <summary>
+        ///     Get name in the row to be deleted
+        ///     Delete row from database using stored procedure
+        ///     Bind Data to Grid View
+        /// </summary>
         protected void GridViewUser_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
             {
                 // Get user name in the row to be deleted 
-                string name = GridViewUser.Rows[e.RowIndex].Cells[0].Text;
-
+                string name = ((Label)GridViewUser.Rows[e.RowIndex].Cells[2].FindControl("lblName")).Text;
                 // Create connection to SQL Server
                 using (SqlConnection con = new SqlConnection(CS))
                 {
@@ -177,6 +224,13 @@ namespace AddressManagementSystem
                 ErrorMessage.Text = ex.Message;
             }
         }
+        #endregion
+
+        #region Row Data Bound
+        /// <summary>
+        ///     Deteremine whether delete button is clicked
+        ///     Run javascript to display confirmation message
+        /// </summary>
         protected void GridViewUser_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             try
@@ -196,8 +250,122 @@ namespace AddressManagementSystem
             catch (Exception ex)
             {
                 ErrorMessage.Text = ex.Message;
-
             }
         }
+        #endregion
+
+        #region Sorting Rows
+        /// <summary>
+        /// 
+        /// </summary>
+        protected void GridViewUser_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            //Specify the direction in which to sort a list of items as ascending
+            SortDirection sortDirection = SortDirection.Ascending;
+            string sortField = string.Empty;
+
+            SortGridview((GridView)sender, e, out sortDirection, out sortField);
+
+            string strSortDirection = sortDirection == SortDirection.Ascending ? "ASC" : "DESC";
+
+            // Create connection to SQL Server
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                //Create a DataAdapter, and then provide the name of the stored procedure.
+                SqlDataAdapter da = new SqlDataAdapter("spSortGridViewByField", con);
+
+                //Set the command type as StoredProcedure.
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                //Create and add a parameter to Parameters collection for the stored procedure.
+                da.SelectCommand.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+                da.SelectCommand.Parameters.AddWithValue("@SortExpression", e.SortExpression.ToString());
+                da.SelectCommand.Parameters.AddWithValue("@SortDirection", strSortDirection);
+
+                // Create a new DataSet to hold the records.
+                DataSet DS = new DataSet();
+
+                // Fill the DataSet with the rows that are returned.
+                da.Fill(DS);
+
+                // Set the data source for the GridView as the DataSet that holds the rows.
+                GridViewUser.DataSource = DS;
+                GridViewUser.DataBind();
+            }
+        }
+        protected void GridViewUser_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            // Check if CurrentSortField and CurrentSortDirection is not null
+            if (GridViewUser.Attributes["CurrentSortField"] != null && GridViewUser.Attributes["CurrentSortDirection"] != null)
+            {
+                if (e.Row.RowType == DataControlRowType.Header)
+                {
+                    foreach (TableCell tableCell in e.Row.Cells)
+                    {
+                        if (tableCell.HasControls())
+                        {
+                            LinkButton sortLinkButton = null;
+                            if (tableCell.Controls[0] is LinkButton)
+                            {
+                                sortLinkButton = (LinkButton)tableCell.Controls[0];
+                            }
+
+                            if (sortLinkButton != null && GridViewUser.Attributes["CurrentSortField"] == sortLinkButton.CommandArgument)
+                            {
+                                Image image = new Image();
+                                // Check the Current Sort Direction
+                                if (GridViewUser.Attributes["CurrentSortDirection"] == "ASC")
+                                {
+                                    // Set image of up arrow to image url
+                                    image.ImageUrl = "~/Images/up_arrow.png";
+                                    image.Width = Unit.Pixel(10);
+                                }
+                                else
+                                {
+                                    // Set image of down arrow to image url
+                                    image.ImageUrl = "~/Images/down_arrow.png";
+                                    image.Width = Unit.Pixel(10);
+                                }
+                                // Add image to column heading
+                                tableCell.Controls.Add(new LiteralControl("&nbsp;"));
+                                tableCell.Controls.Add(image);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void SortGridview(GridView GridViewUser, GridViewSortEventArgs e, out SortDirection sortDirection, out string sortField)
+        {
+            //Get field used to sort items in Grid View
+            sortField = e.SortExpression;
+
+            //Get direction in which to sort items in Grid View
+            sortDirection = e.SortDirection;
+
+            // Check if CurrentSortField and CurrentSortDirection is not null
+            if (GridViewUser.Attributes["CurrentSortField"] != null && GridViewUser.Attributes["CurrentSortDirection"] != null)
+            {
+                //Check if CurrentSortField is equal to the field
+                if (sortField == GridViewUser.Attributes["CurrentSortField"])
+                {
+                    //Check if CurrentSortDirection is ascending
+                    if (GridViewUser.Attributes["CurrentSortDirection"] == "ASC")
+                    {
+                        //Specify the direction in which to sort the items as descending
+                        sortDirection = SortDirection.Descending;
+                    }
+                    else
+                    {
+                        //Specify the direction in which to sort the items  as ascending
+                        sortDirection = SortDirection.Ascending;
+                    }
+                }
+                //Set CurrentSortField and CurrentSortDirection
+                GridViewUser.Attributes["CurrentSortField"] = sortField;
+                GridViewUser.Attributes["CurrentSortDirection"] = (sortDirection == SortDirection.Ascending ? "ASC" : "DESC");
+            }
+        }
+        #endregion
     }
 }

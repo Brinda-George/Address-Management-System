@@ -113,6 +113,8 @@
     <Content Include="App_Data\ErrorLog.txt" />
     <Content Include="Images\address.JPG" />
     <Content Include="Images\contact.png" />
+    <Content Include="Images\down_arrow.png" />
+    <Content Include="Images\up_arrow.png" />
     <Content Include="Public\Error.aspx" />
     <Content Include="Scripts\print.js" />
     <Content Include="Public\Contact.aspx" />

@@ -8,7 +8,7 @@
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
     <asp:ValidationSummary runat="server" CssClass="text-danger" />
-    <asp:GridView ID="GridViewUser" runat="server" DataKeyNames="Name" CssClass="gridview" AutoGenerateColumns="False" OnRowDataBound="GridViewUser_RowDataBound" OnRowCancelingEdit="GridViewUser_RowCancelingEdit" OnRowDeleting="GridViewUser_RowDeleting" OnRowEditing="GridViewUser_RowEditing" OnRowUpdating="GridViewUser_RowUpdating">
+    <asp:GridView ID="GridViewUser" runat="server" DataKeyNames="Name" CssClass="gridview" AutoGenerateColumns="False" OnRowDataBound="GridViewUser_RowDataBound" OnRowCancelingEdit="GridViewUser_RowCancelingEdit" OnRowDeleting="GridViewUser_RowDeleting" OnRowEditing="GridViewUser_RowEditing" OnRowUpdating="GridViewUser_RowUpdating" AllowSorting="true" OnSorting="GridViewUser_Sorting" CurrentSortField="Name" CurrentSortDirection="ASC" OnRowCreated="GridViewUser_RowCreated">
         <Columns>
             <asp:TemplateField HeaderText="Name" SortExpression="Name">
                 <EditItemTemplate>
