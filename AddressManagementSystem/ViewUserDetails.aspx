@@ -10,14 +10,23 @@
     <asp:ValidationSummary runat="server" CssClass="text-danger" />
     <asp:GridView ID="GridViewUser" runat="server" DataKeyNames="Name" CssClass="gridview" AutoGenerateColumns="False" OnRowDataBound="GridViewUser_RowDataBound" OnRowCancelingEdit="GridViewUser_RowCancelingEdit" OnRowDeleting="GridViewUser_RowDeleting" OnRowEditing="GridViewUser_RowEditing" OnRowUpdating="GridViewUser_RowUpdating">
         <Columns>
-            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+            <asp:TemplateField HeaderText="Name" SortExpression="Name">
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtName" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtName" CssClass="text-danger" ErrorMessage="The User Name field is required." Text="*" />
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="Age" SortExpression="Age">
                 <EditItemTemplate>
                     <asp:TextBox ID="txtAge" runat="server" Text='<%# Bind("Age") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtAge" CssClass="text-danger" ErrorMessage="The Age field is required." Text="*" />
+                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtAge" CssClass="text-danger" ErrorMessage="Only numeric allowed for Age" ValidationExpression="^[0-9]*$" Text="*" ></asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Age") %>'></asp:Label>
+                    <asp:Label ID="lblAge" runat="server" Text='<%# Bind("Age") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Date Of Birth" SortExpression="DOB">
@@ -35,25 +44,27 @@
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtAddress" CssClass="text-danger" ErrorMessage="The Address field is required." Text="*" />
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Address") %>'></asp:Label>
+                    <asp:Label ID="lblAddress" runat="server" Text='<%# Bind("Address") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Email" SortExpression="Email">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtEmail" runat="server" Text='<%# Bind("Email") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" Text='<%# Bind("Email") %>' TextMode="Email"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The Email field is required." Text="*" />
+                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="Invalid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" Text="*" ></asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
+                    <asp:Label ID="lblEmail" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Phone Number" SortExpression="PhoneNumber">
                 <EditItemTemplate>
                     <asp:TextBox ID="txtPhoneNo" runat="server" Text='<%# Bind("PhoneNumber") %>'></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhoneNo" CssClass="text-danger" ErrorMessage="The Phone Number field is required." Text="*" />
+                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPhoneNo" CssClass="text-danger" ErrorMessage="Only numeric allowed for Phone Number" ValidationExpression="^[0-9]*$" Text="*" ></asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("PhoneNumber") %>'></asp:Label>
+                    <asp:Label ID="lblPhoneNo" runat="server" Text='<%# Bind("PhoneNumber") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField ShowEditButton="True"></asp:CommandField>

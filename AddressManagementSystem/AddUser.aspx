@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Enter User Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddUser.aspx.cs" Inherits="AddressManagementSystem.AddUser" %>
+﻿<%@ Page Title="Add a new user" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddUser.aspx.cs" Inherits="AddressManagementSystem.AddUser" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -7,7 +7,7 @@
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
     <div class="form-horizontal">
-        <h4>Add a new user</h4>
+        <h4>Enter User Details</h4>
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
         <div class="form-group">
@@ -21,7 +21,8 @@
             <asp:Label runat="server" AssociatedControlID="txtAge" CssClass="col-md-2 control-label">Age</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtAge" CssClass="form-control"/>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtAge" CssClass="text-danger" ErrorMessage="The Age field is required." />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtAge" CssClass="text-danger" ErrorMessage="The Age field is required." /><br />
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtAge" CssClass="text-danger" ErrorMessage="Only numeric allowed for Age." ValidationExpression="^[0-9]*$"></asp:RegularExpressionValidator>
             </div>
         </div>
         <div class="form-group">
@@ -29,7 +30,6 @@
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control" TextMode="Date" Width="280px"/>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDOB" CssClass="text-danger" ErrorMessage="The Date Of Birth field is required." />
-                <%--<asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ErrorMessage="Invalid Email" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" Text="*" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>--%>
             </div>
         </div>
         <div class="form-group">
@@ -43,14 +43,16 @@
             <asp:Label runat="server" AssociatedControlID="txtEmail" CssClass="col-md-2 control-label">Email</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" TextMode="Email" />
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The Email field is required." />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The Email field is required." /><br />
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="Invalid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
             </div>
         </div>
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtPhoneNo" CssClass="col-md-2 control-label">Phone Number</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtPhoneNo" CssClass="form-control"/>
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhoneNo" CssClass="text-danger" ErrorMessage="The Phone Number field is required." />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhoneNo" CssClass="text-danger" ErrorMessage="The Phone Number field is required." /><br />
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPhoneNo" CssClass="text-danger" ErrorMessage="Only numeric allowed for Phone Number." ValidationExpression="^[0-9]*$"></asp:RegularExpressionValidator>
             </div>
         </div>
         <div class="form-group">
