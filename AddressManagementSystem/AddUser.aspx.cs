@@ -54,8 +54,7 @@ namespace AddressManagementSystem
                         if (ReturnCode == -1)
                         {
                             // Display message that name already exists
-                            lblMessage.ForeColor = System.Drawing.Color.Red;
-                            lblMessage.Text = "Name already in use, please choose another user name";
+                            ErrorMessage.Text = "Name already in use, please choose another user name";
                         }
                         else
                         {
@@ -76,8 +75,7 @@ namespace AddressManagementSystem
                 catch (Exception ex)
                 {
                     // Log the exception information to event viewer
-                    lblMessage.ForeColor = System.Drawing.Color.Red;
-                    lblMessage.Text = ex.Message;
+                    ErrorMessage.Text = ex.Message;
                 }
 
             }
