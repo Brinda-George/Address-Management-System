@@ -87,7 +87,7 @@ namespace AddressManagementSystem
         protected void GridViewUser_RowEditing(object sender, GridViewEditEventArgs e)
         {
             // Get name in the row
-            editName = GridViewUser.Rows[e.NewEditIndex].Cells[0].Text;
+            editName = ((Label)GridViewUser.Rows[e.NewEditIndex].Cells[2].FindControl("lblName")).Text;
 
             // Update EditIndex with the Row Index of the GridView Row to be edited.
             GridViewUser.EditIndex = e.NewEditIndex;
