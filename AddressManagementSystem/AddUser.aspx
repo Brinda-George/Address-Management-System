@@ -43,12 +43,13 @@
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" TextMode="Email" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The Email field is required." />
+                <%--<asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ErrorMessage="Invalid Email" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" Text="*" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>--%>
             </div>
         </div>
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtPhoneNo" CssClass="col-md-2 control-label">Phone Number</asp:Label>
             <div class="col-md-10">
-                <asp:TextBox runat="server" ID="txtPhoneNo" CssClass="form-control"/>
+                <asp:TextBox runat="server" ID="txtPhoneNo" CssClass="form-control" TextMode="Phone"/>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhoneNo" CssClass="text-danger" ErrorMessage="The Phone Number field is required." />
             </div>
         </div>
