@@ -18,21 +18,33 @@ namespace AddressManagementSystem
         }
         private bool AuthenticateUser(string username, string password)
         {
+            // Load connection string from web.config file
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+
+            // Create connection to SQL Server
             using (SqlConnection con = new SqlConnection(CS))
             {
+                // Create a command object and provide stored procedure name
                 SqlCommand cmd = new SqlCommand("spAuthenticateUser", con);
+
+                // Set the command type as Stored procedure
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                //Produces a hash password based on the specified password and hash algorithm SHA1
                 string EncryptedPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
-                SqlParameter paramUsername = new SqlParameter("@UserName", username);
-                SqlParameter paramPassword = new SqlParameter("@Password", EncryptedPassword);
 
-                cmd.Parameters.Add(paramUsername);
-                cmd.Parameters.Add(paramPassword);
+                // Create and add parameters to Parameters collection for the stored procedure.
+                cmd.Parameters.AddWithValue("@UserName", username);
+                cmd.Parameters.AddWithValue("@Password", EncryptedPassword);
 
+                // Open database connection
                 con.Open();
+
+                // Execute the SQL statement
                 int ReturnCode = (int)cmd.ExecuteScalar();
+
+                // Returns 1 if user is authenticated
+                // Return true if ReturnCode is 1 else false
                 return ReturnCode == 1;
             }
         }
@@ -43,8 +55,11 @@ namespace AddressManagementSystem
             {
                 if (AuthenticateUser(txtUserName.Text, txtPassword.Text))
                 {
+                    // Get current session object
                     Session["Name"] = txtUserName.Text;
                     Session["UserId"] = GetUserId();
+
+                    // Create the authentication cookie and redirect the user to home page
                     FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, chkBoxRememberMe.Checked);
                 }
                 else

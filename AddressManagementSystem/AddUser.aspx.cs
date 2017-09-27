@@ -33,7 +33,7 @@ namespace AddressManagementSystem
                     // Create connection to SQL Server
                     using (SqlConnection con = new SqlConnection(CS))
                     {
-                        // Create a command object
+                        // Create a command object and provide stored procedure name
                         SqlCommand cmd = new SqlCommand("spAddUser", con);
                         // Set the command type as Stored procedure
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -48,9 +48,9 @@ namespace AddressManagementSystem
 
                         // Open connection
                         con.Open();
-                        // Run the SQL statement
+                        // Execute the SQL statement
                         int ReturnCode = (int)cmd.ExecuteScalar();
-                        // Returns -1, if user name already exists in database
+                        // ReturnCode = -1, if user name already exists in database
                         if (ReturnCode == -1)
                         {
                             // Display message that name already exists
