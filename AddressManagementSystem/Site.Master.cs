@@ -13,14 +13,14 @@ namespace AddressManagementSystem
         public string LblUserName
         {
 
-            // Find label lblUserName in master page and Return its text
+            // Find label in master page and Return its text
             get
             {
                 var lblMyLabel = (Label)lvUserInfo.FindControl("lblUserName");
                 return lblMyLabel.Text;
             }
 
-            // Find label lblUserName in master page and set its text
+            // Find label in master page and set its text
             set
             {
                 var lblMyLabel = (Label)lvUserInfo.FindControl("lblUserName");
@@ -32,10 +32,16 @@ namespace AddressManagementSystem
         }
         protected void Logout_LoggingOut(object sender, LoginCancelEventArgs e)
         {
+            // Clear session
             Session.Clear();
+
+            // Destroys all objects stored in a Session object and releases their resources
             Session.Abandon();
-            Session.RemoveAll();
+
+            // Removes the forms-authentication ticket from the browser.
             FormsAuthentication.SignOut();
+
+            // Redirects the browser to the login URL.
             FormsAuthentication.RedirectToLoginPage();
         }
         
