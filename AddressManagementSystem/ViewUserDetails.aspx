@@ -37,6 +37,6 @@
     </asp:SqlDataSource>
     
     <asp:Button ID="btnPrint" runat="server" Text="Print" OnClientClick="PrintDetailsView()" />
-    <%--<script src="Scripts/print.js"></script>--%>
+    <asp:Label ID="lblMessage" runat="server"></asp:Label>
     <p><asp:HyperLink runat="server" ID="HomeHyperLink" NavigateUrl="~/Home.aspx">Back To Home Page</asp:HyperLink> | <asp:HyperLink runat="server" ID="AddUserHyperLink" NavigateUrl="~/AddUser.aspx">Add a new user</asp:HyperLink></p>
 </asp:Content>

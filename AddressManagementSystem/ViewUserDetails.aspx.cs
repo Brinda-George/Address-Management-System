@@ -59,7 +59,6 @@ namespace AddressManagementSystem
                 // Create connection to SQL Server
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-
                     // Create a DataAdapter, and then provide the name of the stored procedure.
                     SqlDataAdapter da = new SqlDataAdapter("spGetUserDetailsbyUserId", con);
 
@@ -82,7 +81,8 @@ namespace AddressManagementSystem
             }
             catch (Exception ex)
             {
-                throw ex;
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = ex.Message;
             }
         }
         protected void GridViewUser_RowEditing(object sender, GridViewEditEventArgs e)
@@ -105,7 +105,6 @@ namespace AddressManagementSystem
                 // Create connection to SQL Server
                 using (SqlConnection con = new SqlConnection(CS))
                 {
-
                     // Create a DataAdapter, and then provide the name of the stored procedure.
                     SqlDataAdapter da = new SqlDataAdapter("spUpdateUser", con);
 
@@ -133,7 +132,8 @@ namespace AddressManagementSystem
             }
             catch (Exception ex)
             {
-                throw ex;
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = ex.Message;
             }
         }
         protected void GridViewUser_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -175,7 +175,8 @@ namespace AddressManagementSystem
             }
             catch (Exception ex)
             {
-                throw ex;
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = ex.Message;
             }
         }
         protected void GridViewUser_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -185,14 +186,19 @@ namespace AddressManagementSystem
                 // Check if delete button is clicked
                 if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != GridViewUser.EditIndex)
                 {
-
-                    // Run javascript on client side click to display confirmation message
-                    ((LinkButton)e.Row.Cells[7].Controls[0]).OnClientClick ="return confirm('Are you sure you want to delete? This cannot be undone.');";
+                    Control control = e.Row.Cells[7].Controls[0];
+                    if (control is LinkButton)
+                    {
+                        // Run javascript on client side click to display confirmation message
+                        ((LinkButton)control).OnClientClick = "return confirm('Are you sure you want to delete? This cannot be undone.');";
+                    }
                 }
+
             }
             catch (Exception ex)
             {
-                throw ex;
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = ex.Message;
             }
         }
     }
