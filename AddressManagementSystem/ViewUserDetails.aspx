@@ -1,20 +1,32 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewUserDetails.aspx.cs" Inherits="AddressManagementSystem.ViewUserDetails" %>
+﻿<%@ Page Title="View User Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewUserDetails.aspx.cs" Inherits="AddressManagementSystem.ViewUserDetails" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
      <script src="../Scripts/print.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <h2><%: Title %>.</h2>
+    <p class="text-danger">
+        <asp:Literal runat="server" ID="ErrorMessage" />
+    </p>
+    <asp:ValidationSummary runat="server" CssClass="text-danger" />
     <asp:GridView ID="GridViewUser" runat="server" DataKeyNames="Name" CssClass="gridview" AutoGenerateColumns="False" OnRowDataBound="GridViewUser_RowDataBound" OnRowCancelingEdit="GridViewUser_RowCancelingEdit" OnRowDeleting="GridViewUser_RowDeleting" OnRowEditing="GridViewUser_RowEditing" OnRowUpdating="GridViewUser_RowUpdating">
         <Columns>
             <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
             <asp:BoundField DataField="Age" HeaderText="Age" SortExpression="Age" />
-            <asp:BoundField DataField="DOB" HeaderText="Date Of Birth" SortExpression="DOB" />
+            <asp:TemplateField HeaderText="Date Of Birth" SortExpression="DOB">
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtDOB" runat="server" Text='<%# Bind("DOB") %>' TextMode="Date"></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="lblDOB" runat="server" Text='<%# Bind("DOB") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="Address" HeaderText="Address" SortExpression="Address" />
             <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
             <asp:BoundField DataField="PhoneNumber" HeaderText="Phone Number" SortExpression="PhoneNumber" />
             <asp:CommandField ShowEditButton="True"></asp:CommandField>
             <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
-                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete" OnClientClick="return confirm('Are you sure you want to delete? This cannot be undone.');"></asp:LinkButton>
+                    <asp:LinkButton ID="lnkBtnDelete" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete" OnClientClick="return confirm('Are you sure you want to delete? This cannot be undone.');"></asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField ShowSelectButton="True" />

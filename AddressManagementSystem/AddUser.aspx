@@ -29,6 +29,7 @@
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control" TextMode="Date" Width="280px"/>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDOB" CssClass="text-danger" ErrorMessage="The Date Of Birth field is required." />
+                <%--<asp:RegularExpressionValidator ID="RegularExpressionValidatorEmail" runat="server" ErrorMessage="Invalid Email" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" Text="*" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>--%>
             </div>
         </div>
         <div class="form-group">
