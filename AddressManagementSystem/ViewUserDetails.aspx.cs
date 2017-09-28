@@ -55,13 +55,13 @@ namespace AddressManagementSystem
             {
                 // Hide DetailsView and print button
                 DetailsViewUser.Visible = false;
-                btnPrint.Visible = false;
+                lnkBtnPrint.Visible = false;
             }
             else
             {
                 // Show DetailsView and print button
                 DetailsViewUser.Visible = true;
-                btnPrint.Visible = true;
+                lnkBtnPrint.Visible = true;
             }
         }
         #endregion
@@ -96,7 +96,7 @@ namespace AddressManagementSystem
                     GridViewUser.DataSource = DS;
                     if (DS.Tables[0].Rows.Count == 0)
                     {
-                        lblMessage.Text = "No users yet......";
+                        Message.Text = "No users yet......";
                     }
                     else
                     {

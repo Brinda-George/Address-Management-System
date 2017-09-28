@@ -15,12 +15,15 @@
     <p class="text-danger">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
+    <p class="h3">
+        <asp:Literal ID="Message" runat="server"></asp:Literal>
+    </p>
     <asp:ValidationSummary runat="server" CssClass="text-danger" />
-    <asp:GridView ID="GridViewUser" runat="server" DataKeyNames="Name" CssClass="gridview" AutoGenerateColumns="False" OnRowDataBound="GridViewUser_RowDataBound" OnRowCancelingEdit="GridViewUser_RowCancelingEdit" OnRowDeleting="GridViewUser_RowDeleting" OnRowEditing="GridViewUser_RowEditing" OnRowUpdating="GridViewUser_RowUpdating" AllowSorting="true" OnSorting="GridViewUser_Sorting" CurrentSortField="Name" CurrentSortDirection="ASC" OnRowCreated="GridViewUser_RowCreated">
+    <asp:GridView ID="GridViewUser" runat="server" DataKeyNames="Name" CssClass="gridview" AutoGenerateColumns="False" OnRowDataBound="GridViewUser_RowDataBound" OnRowCancelingEdit="GridViewUser_RowCancelingEdit" OnRowDeleting="GridViewUser_RowDeleting" OnRowEditing="GridViewUser_RowEditing" OnRowUpdating="GridViewUser_RowUpdating" AllowSorting="True" OnSorting="GridViewUser_Sorting" CurrentSortField="Name" CurrentSortDirection="ASC" OnRowCreated="GridViewUser_RowCreated">
         <Columns>
             <asp:TemplateField HeaderText="Name" SortExpression="Name">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtName" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtName" runat="server" Text='<%# Bind("Name") %>' ></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtName" CssClass="text-danger" ErrorMessage="The User Name field is required." Text="*" />
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -34,12 +37,12 @@
                     <asp:RegularExpressionValidator runat="server" ControlToValidate="txtAge" CssClass="text-danger" ErrorMessage="Only numeric allowed for Age" ValidationExpression="^[0-9]*$" Text="*" ></asp:RegularExpressionValidator>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="lblAge" runat="server" Text='<%# Bind("Age") %>'></asp:Label>
+                    <asp:Label ID="lblAge" runat="server" Text='<%# Bind("Age") %>' ></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Date Of Birth" SortExpression="DOB">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtDOB" runat="server" Text='<%# Bind("DOB") %>' TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="txtDOB" runat="server" Text='<%# Bind("DOB") %>' TextMode="Date" ></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDOB" CssClass="text-danger" ErrorMessage="The Date Of Birth field is required." Text="*" />
                 </EditItemTemplate>
                 <ItemTemplate>
@@ -48,11 +51,11 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Address" SortExpression="Address">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtAddress" runat="server" Text='<%# Bind("Address") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtAddress" runat="server" Text='<%# Bind("Address") %>' ></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtAddress" CssClass="text-danger" ErrorMessage="The Address field is required." Text="*" />
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="lblAddress" runat="server" Text='<%# Bind("Address") %>'></asp:Label>
+                    <asp:Label ID="lblAddress" runat="server" Text='<%# Bind("Address") %>' ></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Email" SortExpression="Email">
@@ -67,7 +70,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Phone Number" SortExpression="PhoneNumber">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtPhoneNo" runat="server" Text='<%# Bind("PhoneNumber") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtPhoneNo" runat="server" Text='<%# Bind("PhoneNumber") %>' ></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhoneNo" CssClass="text-danger" ErrorMessage="The Phone Number field is required." Text="*" />
                     <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPhoneNo" CssClass="text-danger" ErrorMessage="Only numeric allowed for Phone Number" ValidationExpression="^[0-9]*$" Text="*" ></asp:RegularExpressionValidator>
                 </EditItemTemplate>
@@ -75,13 +78,25 @@
                     <asp:Label ID="lblPhoneNo" runat="server" Text='<%# Bind("PhoneNumber") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField ShowEditButton="True"></asp:CommandField>
             <asp:TemplateField ShowHeader="False">
+                <EditItemTemplate>
+                    <asp:LinkButton ID="lnkBtnUpdate" runat="server" CausesValidation="True" CommandName="Update" Text="<i class='fa fa-eraser' aria-hidden='true'></i>&nbsp;Update"></asp:LinkButton>
+                    &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="<i class='fa fa-times' aria-hidden='true'></i>&nbsp;Cancel"></asp:LinkButton>
+                </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:LinkButton ID="lnkBtnDelete" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete" OnClientClick="return confirm('Are you sure you want to delete? This cannot be undone.');"></asp:LinkButton>
+                    <asp:LinkButton ID="lnkBtnEdit" runat="server" CausesValidation="False" CommandName="Edit" Text="<i class='fa fa-pencil-square-o' aria-hidden='true'></i>&nbsp;Edit"></asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField ShowSelectButton="True" />
+            <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:LinkButton ID="lnkBtnDelete" runat="server" CausesValidation="False" CommandName="Delete" Text="<i class='fa fa-trash' aria-hidden='true'></i>&nbsp;Delete" OnClientClick="return confirm('Are you sure you want to delete? This cannot be undone.');"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:LinkButton ID="lnkBtnSelect" runat="server" CausesValidation="False" CommandName="Select" Text="<i class='fa fa-file' aria-hidden='true'></i>&nbsp;Select"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
     <asp:DetailsView ID="DetailsViewUser" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" ClientIDMode="Static" DataSourceID="SqlDataSource1">
@@ -99,7 +114,7 @@
             <asp:ControlParameter ControlID="GridViewUser" Name="Name" PropertyName="SelectedValue" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource><br />
-    <asp:Button ID="btnPrint" runat="server" Text="Print" OnClientClick="PrintDetailsView()" />
+    <asp:LinkButton ID="lnkBtnPrint" runat="server" CssClass="btn btn-default btn-info" Text="<i class='fa fa-print' aria-hidden='true'></i>&nbsp;Print" OnClientClick="PrintDetailsView()" />
     <p><asp:Label ID="lblMessage" runat="server"></asp:Label></p><br />
     <p><asp:HyperLink runat="server" ID="HomeHyperLink" NavigateUrl="~/Home.aspx">Back To Home Page</asp:HyperLink> | <asp:HyperLink runat="server" ID="AddUserHyperLink" NavigateUrl="~/AddUser.aspx">Add a new user</asp:HyperLink></p>
 </asp:Content>
