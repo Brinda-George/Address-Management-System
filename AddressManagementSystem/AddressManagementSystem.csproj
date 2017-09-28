@@ -116,6 +116,7 @@
     <Content Include="Images\down_arrow.png" />
     <Content Include="Images\up_arrow.png" />
     <Content Include="Public\Error.aspx" />
+    <Content Include="Scripts\googlemap.js" />
     <Content Include="Scripts\print.js" />
     <Content Include="Public\Contact.aspx" />
     <Content Include="Content\gridstyle.css" />
