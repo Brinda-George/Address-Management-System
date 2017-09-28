@@ -7,6 +7,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Address Management System</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="~/Content/site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -28,22 +30,22 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/Home.aspx">Home</a></li>
-                        <li><a runat="server" href="~/Public/About.aspx">About</a></li>
-                        <li><a runat="server" href="~/Public/Contact.aspx">Contact</a></li>
+                        <li><a runat="server" href="~/Home.aspx"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a></li>
+                        <li><a runat="server" href="~/Public/About.aspx"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;About</a></li>
+                        <li><a runat="server" href="~/Public/Contact.aspx"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Contact</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled" ID="lvUserInfo">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Public/Register.aspx">Register</a></li>
-                                <li><a runat="server" href="~/Login.aspx">Log in</a></li>
+                                <li><a runat="server" href="~/Public/Register.aspx"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Register</a></li>
+                                <li><a runat="server" href="~/Login.aspx"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Log in</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#"><asp:Label ID="lblUserName" runat="server"></asp:Label></a></li>
+                                <li><a href="#"><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;<asp:Label ID="lblUserName" runat="server"></asp:Label></a></li>
                                 <li>
-                                    <asp:LoginStatus ID="Logout" runat="server" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/Login.aspx" OnLoggingOut="Logout_LoggingOut"/>
+                                    <asp:LoginStatus ID="Logout" runat="server" LogoutAction="Redirect" LogoutText="<i class='fa fa-sign-out' aria-hidden='true'></i>&nbsp;Log out" LogoutPageUrl="~/Login.aspx" OnLoggingOut="Logout_LoggingOut" />
                                 </li>
                             </ul>
                         </LoggedInTemplate>

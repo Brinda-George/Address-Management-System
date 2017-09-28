@@ -14,7 +14,13 @@ namespace AddressManagementSystem
         {
 
         }
-        protected void Button1_Click(object sender, EventArgs e)
+        /// <summary>
+        ///     Create the message object
+        ///     Configure an SmtpClient to send the mail
+        ///     Display feedback to the user
+        ///     Clear the form
+        /// </summary>
+        protected void linkButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -54,14 +60,13 @@ namespace AddressManagementSystem
                     txtEmail.Text = "";
                     txtComments.Text = "";
                     txtSubject.Text = "";
-                    btnSubmit.Enabled = false;
+                    linkButton.Enabled = false;
                 }
             }
             catch (Exception ex)
             {
                 // Log the exception information to event viewer
-                lblMessage.ForeColor = System.Drawing.Color.Red;
-                lblMessage.Text = "Your message failed to send, please try later.";
+                ErrorMessage.Text = "Your message failed to send, please try later.";
             }
         }
     }
