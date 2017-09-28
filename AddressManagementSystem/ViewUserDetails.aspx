@@ -1,6 +1,14 @@
 ﻿<%@ Page Title="View User Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewUserDetails.aspx.cs" Inherits="AddressManagementSystem.ViewUserDetails" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
      <script src="../Scripts/print.js" type="text/javascript"></script>
+<style type="text/css">
+    .auto-style2 {
+        color: #468847;
+        font-size: larger;
+        border-color: #d6e9c6;
+        background-color: #dff0d8;
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
@@ -90,9 +98,8 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="GridViewUser" Name="Name" PropertyName="SelectedValue" Type="String" />
         </SelectParameters>
-    </asp:SqlDataSource>
-    
+    </asp:SqlDataSource><br />
     <asp:Button ID="btnPrint" runat="server" Text="Print" OnClientClick="PrintDetailsView()" />
-    <asp:Label ID="lblMessage" runat="server"></asp:Label>
+    <p><asp:Label ID="lblMessage" runat="server"></asp:Label></p><br />
     <p><asp:HyperLink runat="server" ID="HomeHyperLink" NavigateUrl="~/Home.aspx">Back To Home Page</asp:HyperLink> | <asp:HyperLink runat="server" ID="AddUserHyperLink" NavigateUrl="~/AddUser.aspx">Add a new user</asp:HyperLink></p>
 </asp:Content>

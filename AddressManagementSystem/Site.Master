@@ -45,7 +45,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#"><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp;<asp:Label ID="lblUserName" runat="server"></asp:Label></a></li>
                                 <li>
-                                    <asp:LoginStatus ID="Logout" runat="server" LogoutAction="Redirect" LogoutText="<i class='fa fa-sign-out' aria-hidden='true'></i>&nbsp;Log out" LogoutPageUrl="~/Login.aspx" OnLoggingOut="Logout_LoggingOut"/>
+                                    <asp:LoginStatus ID="Logout" runat="server" LogoutAction="Redirect" LogoutText="<i class='fa fa-sign-out' aria-hidden='true'></i>&nbsp;Log out" LogoutPageUrl="~/Login.aspx" OnLoggingOut="Logout_LoggingOut" />
                                 </li>
                             </ul>
                         </LoggedInTemplate>

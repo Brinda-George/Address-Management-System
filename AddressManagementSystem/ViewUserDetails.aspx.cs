@@ -94,7 +94,14 @@ namespace AddressManagementSystem
 
                     // Set the data source for the GridView as the DataSet that holds the rows.
                     GridViewUser.DataSource = DS;
-                    GridViewUser.DataBind();
+                    if (DS.Tables[0].Rows.Count == 0)
+                    {
+                        lblMessage.Text = "No users yet......";
+                    }
+                    else
+                    {
+                        GridViewUser.DataBind();
+                    } 
                 }
             }
             catch (Exception ex)
