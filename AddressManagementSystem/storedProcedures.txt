@@ -1,0 +1,156 @@
+create Procedure [dbo].[spAuthenticateUser] @UserName nvarchar(50), @Password nvarchar(50)
+as
+Begin
+ Declare @Count int
+ 
+ Select @Count = COUNT(UserName) from tblUser
+ where [UserName] = @UserName and [Password] = @Password
+ 
+ if(@Count = 1)
+ Begin
+  Select 1 as ReturnCode
+ End
+ Else
+ Begin
+  Select -1 as ReturnCode
+ End
+End 
+-------------------------------------------------------
+create proc [dbo].[spRegisterUser]  @UserName nvarchar(50),  @Password nvarchar (50),  @Email nvarchar (50)  
+as  
+Begin  
+ Declare @Count int  
+ Declare @ReturnCode int  
+   
+ Select @Count = COUNT(UserName)   
+ from tblUser where UserName = @UserName  
+ If @Count > 0  
+ Begin  
+  Set @ReturnCode = -1  
+ End  
+ Else  
+ Begin  
+  Set @ReturnCode = 1  
+  Insert into tblUser([UserName], [Password], [Email]) 
+  values  (@UserName, @Password, @Email)  
+ End  
+ Select @ReturnCode as ReturnValue  
+End
+------------------------------------------------------
+create proc [dbo].[spAddUser]  @Name nvarchar(50),  @Age int,  @DOB nvarchar (50), @Address nvarchar (200)  , @Email nvarchar (50), @PhoneNo bigint, @UserId int    
+as  
+Begin  
+ Declare @Count int  
+ Declare @ReturnCode int  
+   
+ Select @Count = COUNT(Name)   
+ from tblUserDetails where Name = @Name  
+ If @Count > 0  
+ Begin  
+  Set @ReturnCode = -1  
+ End  
+ Else  
+ Begin  
+  Set @ReturnCode = 1  
+  Insert into tblUserDetails(Name, Age, DOB, Address, Email, PhoneNumber, UserId) 
+  values(@Name, @Age, @DOB, @Address, @Email, @PhoneNo, @UserId)  
+ End  
+ Select @ReturnCode as ReturnValue  
+End
+---------------------------------------------------------
+create proc [dbo].[spGetUserDetailsbyUserId] @UserId int
+as
+begin
+	select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId
+end
+-----------------------------------------------------
+create proc [dbo].[spGetUserIdByUserName] @UserName nvarchar(50)  
+as  
+Begin  
+ Select UserId 
+ from tblUser where UserName = @UserName  
+End
+---------------------------------------------------------
+create proc [dbo].[spUpdateUser] @UserName nvarchar(50), @Name nvarchar(50), @Age int, @DOB nvarchar(50), @Address nvarchar(200), @Email nvarchar(50), @PhoneNumber bigint
+as
+begin
+	update tblUserDetails set Name = @Name, Age = @Age, DOB = @DOB, Address = @Address, Email = @Email, PhoneNumber = @PhoneNumber where Name = @UserName
+end
+----------------------------------------------------------
+create proc [dbo].[spDeleteUser] @Name nvarchar(50)
+as
+begin
+	delete from tblUserDetails where Name = @Name
+end
+-----------------------------------------------------------
+create Procedure [dbo].[spSortGridViewByField] @UserId int, @SortExpression nvarchar(50), @SortDirection nvarchar(10)
+as
+Begin
+	if(@SortExpression = 'Name')
+	begin
+		if(@SortDirection = 'ASC')
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by Name
+			end
+		else
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by Name desc
+			end
+	end
+
+	if(@SortExpression = 'Age')
+	begin
+		if(@SortDirection = 'ASC')
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by Age
+			end
+		else
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by Age desc
+			end
+	end
+	if(@SortExpression = 'DOB')
+	begin
+		if(@SortDirection = 'ASC')
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by DOB
+			end
+		else
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by DOB desc
+			end
+	end
+	if(@SortExpression = 'Address')
+	begin
+		if(@SortDirection = 'ASC')
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by Address
+			end
+		else
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by Address desc
+			end
+	end
+	if(@SortExpression = 'Email')
+	begin
+		if(@SortDirection = 'ASC')
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by Email
+			end
+		else
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by Email desc
+			end
+	end
+	if(@SortExpression = 'PhoneNumber')
+	begin
+		if(@SortDirection = 'ASC')
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by PhoneNumber
+			end
+		else
+			begin
+			select Name, Age, DOB, Address, Email, PhoneNumber from tblUserDetails where UserId = @UserId order by PhoneNumber desc
+			end
+	end
+End 

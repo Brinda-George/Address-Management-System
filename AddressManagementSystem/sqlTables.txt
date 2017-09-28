@@ -1,0 +1,25 @@
+use AddressDb;
+go
+create table tblUser
+(
+UserId int identity(1,1) primary key not null,
+UserName nvarchar(50) not null,
+Password nvarchar(50) not null,
+Email nvarchar(50) null,
+RetryAttempts int null,
+IsLocked bit null,
+LockedDateTime datetime null
+)
+go
+
+Create Table tblUserDetails
+(
+ Id int primary key identity(1,1) not null,
+ Name nvarchar(50) not null,
+ Age int not null,
+ DOB nvarchar(50) not null,
+ Address nvarchar(200) not null,
+ Email nvarchar(50) not null,
+ PhoneNumber bigint not null,
+ UserId int foreign key references tblUser(UserId)
+) 
